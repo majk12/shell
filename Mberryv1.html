@@ -12,13 +12,11 @@ canvas {
 <body onload="startGame()">
 <script>
 
-//var myBerry;
 var myBerries = [];
 var myBackground;
 var myScore;
 
 function startGame() {
-   // myBerry = new component(45, 74, "img/berry.png", 90, 120, "image");
     myTurtle = new component(70, 30, "img/turtle.png", 100, 130, "image");
     myBackground = new component(656, 270, "img/sea.jpg", 0, 0, "background");
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
@@ -123,11 +121,7 @@ function updateGameArea() {
         minHeight = 20;
         maxHeight = 200;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-        minGap = 50;
-        maxGap = 200;
-        gap = Math.floor(Math.random()*(maxGap - minGap +1) +minGap);
-        myBerries.push(new component(45, 74, "img/berry.png", x, 0, "image"));
-        myBerries.push(new component(45, 74, "img/berry.png", x, height + gap, "image"));
+        myBerries.push(new component(45, 74, "img/berry.png", x, height, "image"));
     }
 
 	myBackground.speedX = -1;
@@ -138,8 +132,6 @@ function updateGameArea() {
         myBerries[i].newPos();
         myBerries[i].update();
     }
-   // myBerry.newPos();
-   // myBerry.update();
     myTurtle.newPos();
     myTurtle.update();
     myScore.text = "SCORE: " + myGameArea.frameNo;
