@@ -12,9 +12,13 @@ canvas {
 <body onload="startGame()">
 <script>
 
+var myBerry;
+var myBackground;
+
 function startGame() {
+    myBerry = new component(45, 74, "img/berry.png", 90, 120, "image");
+    myBackground = new component(656, 270, "img/sea.jpg", 0, 0, "image");
     myGameArea.start();
-    myBerry = new component(45, 74, "berry.png", 50, 120, "image");
 }
 
 var myGameArea = {
@@ -24,6 +28,14 @@ var myGameArea = {
         this.canvas.height = 270;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.frameNo = 0;
+        this.interval = setInterval(updateGameArea, 20);
+        },
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop : function() {
+        clearInterval(this.interval);
     }
 }
 
@@ -51,7 +63,21 @@ function component(width, height, color, x, y, type) {
              ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
+    this.newPos = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;        
+    }
 }
+
+function updateGameArea() {
+    myGameArea.clear();
+    myBackground.speedX = -1;
+    myBackground.newPos();
+    myBackground.update();
+    myBerry.newPos();
+    myBerry.update();
+}
+
 
 </script>
 
