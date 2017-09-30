@@ -17,6 +17,7 @@ var myBackground;
 
 function startGame() {
     myBerry = new component(45, 74, "img/berry.png", 90, 120, "image");
+    myTurtle = new component(70, 30, "img/turtle.png", 100, 130, "image");
     myBackground = new component(656, 270, "img/sea.jpg", 0, 0, "image");
     myGameArea.start();
 }
@@ -76,10 +77,26 @@ function updateGameArea() {
     myBackground.update();
     myBerry.newPos();
     myBerry.update();
+    myTurtle.newPos();
+    myTurtle.update();
+}
+
+function move(dir){
+    if (dir == "up") {myTurtle.speedY = -1; }
+    if (dir == "down") {myTurtle.speedY = 1; }
+    if (dir == "left") {myTurtle.speedX = -1; }
+    if (dir == "right") {myTurtle.speedX = 1; }
 }
 
 
 </script>
+
+<div style="text-align:center;width:480px;">
+  <button onmousedown="move('up')" onmouseup="clearmove()" ontouchstart="move('up')">UP</button><br><br>
+  <button onmousedown="move('left')" onmouseup="clearmove()" ontouchstart="move('left')">LEFT</button>
+  <button onmousedown="move('right')" onmouseup="clearmove()" ontouchstart="move('right')">RIGHT</button><br><br>
+  <button onmousedown="move('down')" onmouseup="clearmove()" ontouchstart="move('down')">DOWN</button>
+</div>
 
 </body>
 </html>
