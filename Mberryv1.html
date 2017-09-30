@@ -34,6 +34,12 @@ var myGameArea = {
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 20);
+        window.addEventListener('keydown', function (e) {
+            myGameArea.key = e.keyCode;
+        })
+        window.addEventListener('keyup', function (e) {
+            myGameArea.key = false;
+        })
         },
     clear : function() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -102,10 +108,13 @@ function component(width, height, color, x, y, type) {
 }
 
 function updateGameArea() {
+    myBackground.speedX = -1;
+    myBackground.newPos();
+    myBackground.update();
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myBerries.length; i += 1) {
         if (myTurtle.crashWith(myBerries[i])) {
-            myScore ++;
+            myGameArea.stop();
             return;
         }
     }
@@ -115,18 +124,24 @@ function updateGameArea() {
         x = myGameArea.canvas.width;
         minHeight = 20;
         maxHeight = 200;
-        height = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myBerries.push(new component(10, height, "img/berry.png", x, 0, "image"))
+        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+        minGap = 50;
+        maxGap = 200;
+        gap = Math.floor(Math.random()*(maxGap - minGap +1) +minGap);
+        myBerries.push(new component(10, height, "img/berry.png", x, 0, "image"));
+        myBerries.push(new component(10, x-height-gap, "img/berry.png", x, height + gap, "image"));
     }
-    myScore.text = "SCORE: " + myScore;
-    myScore.update();
-    myBackground.speedX = -1;
-    myBackground.newPos();
-    myBackground.update();
+    for(i = 0; i <myBerries.length; i +=1) {
+        myBerries[i].speedX = -1;
+        myBerries[i].newPos();
+        myBerries[i].update();
+    }
     myBerry.newPos();
     myBerry.update();
     myTurtle.newPos();
     myTurtle.update();
+    myScore.text = "SCORE: " + myGameArea.frameNo;
+    myScore.update();
 }
 
 function everyinterval(n){
