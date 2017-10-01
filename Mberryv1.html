@@ -19,15 +19,15 @@ var mySound;
 var score = 0;
 
 function startGame() {
-<<<<<<< HEAD
-    myTurtle = new component(70, 30, "img/turtle.png", 100, 130, "image", true);
-    myBackground = new component(656, 270, "img/sea.jpg", 0, 0, "background", false);
+
+    myTurtle = new component(Math.floor(376/3), Math.floor(172/3), "img/turtle.png", 100, 130, "image");
+    myBackground = new component(window.innerWidth/2, window.innerHeight/2, "img/sea.jpg", 0, 0, "background");
     myScore = new component("30px", "Consolas", "black", 280, 40, "text", false);
-=======
+
     myTurtle = new component(70, 30, "img/turtle.png", 100, 130, "image");
     myBackground = new component(window.innerWidth, window.innerHeight, "img/sea.jpg", 0, 0, "background");
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
->>>>>>> ae1a4f759183046974549deea830b84d98276a2a
+
     mySound = new sound("nom.wav");
     myGameArea.start();
 }
