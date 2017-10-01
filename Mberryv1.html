@@ -22,7 +22,7 @@ function startGame() {
 
     myTurtle = new component(Math.floor(376/3), Math.floor(172/3), "img/turtle.png", 100, 130, "image");
     myBackground = new component(window.innerWidth/2, window.innerHeight/2, "img/sea.jpg", 0, 0, "background");
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text", false);
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
 
     mySound = new sound("nom.wav");
     myGameArea.start();
@@ -52,7 +52,7 @@ var myGameArea = {
     }
 }
 
-function component(width, height, color, x, y, type, col) {
+function component(width, height, color, x, y, type) {
     this.type = type;
     if(type == "image" || type == "background"){
         this.image = new Image();
@@ -95,7 +95,6 @@ function component(width, height, color, x, y, type, col) {
         }       
     }
     this.crashWith = function(otherobj) {
-	if(otherobj.col){
         var myleft = this.x;
         var myright = this.x + (this.width);
         var mytop = this.y;
@@ -109,7 +108,6 @@ function component(width, height, color, x, y, type, col) {
             crash = false;
         }
         return crash;
-    }
 	}
 }
 
@@ -131,7 +129,7 @@ function updateGameArea() {
         minHeight = 20;
         maxHeight = 200;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-        myBerries.push(new component(45, 74, "img/berry.png", x, height, "image", true));
+        myBerries.push(new component(45, 74, "img/berry.png", x, height, "image"));
     }
 
 	myBackground.speedX = -1;
