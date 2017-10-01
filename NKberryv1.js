@@ -9,6 +9,9 @@ function startGame() {
     myTurtle = new component(Math.floor(376/3), Math.floor(172/3), "img/turtle.png", 100, 130, "image");
     myBackground = new component(window.innerWidth/2, window.innerHeight/2, "img/sea.jpg", 0, 0, "background");
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+	maxHealth = 100;
+	health = maxHealth;
+	healthBar = new component(health, 10, "green", 10, 10, "bar")
 
     mySound = new sound("nom.wav");
     myGameArea.start();
@@ -102,11 +105,20 @@ function updateGameArea() {
     for (i = 0; i < myBerries.length; i += 1) {
         if (myTurtle.crashWith(myBerries[i])) {
             mySound.play();
-            score ++;
+            health += 20;
 			myBerries.splice(i,1);
 			
         }
     }
+	if(health > maxHealth){health = maxHealth;}
+	health -= 0.5;
+		if(health < 0){health = 0;}
+	healthBar.width = health;
+	if(health < 1){
+		myGameArea.stop;
+		return;
+	}
+
     myGameArea.clear();
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
@@ -151,7 +163,7 @@ function updateGameArea() {
     myTurtle.newPos();
     myTurtle.update();
     myScore.text = "SCORE: " + score;
-    myScore.update();
+	healthBar.update();
 }
 
 function sound(src) { 
