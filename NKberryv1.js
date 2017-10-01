@@ -111,7 +111,7 @@ function updateGameArea() {
         }
     }
 	if(health > maxHealth){health = maxHealth;}
-	health -= 0.5;
+	health -= 0.25;
 		if(health < 0){health = 0;}
 	healthBar.width = health;
 	if(health < 1){
