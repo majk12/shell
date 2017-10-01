@@ -1,6 +1,4 @@
 # shell
-Made during the Shell Hacks Hackathon:)
+Made during the FIU UPE Shell Hacks Hackathon:)
 
-Also known as Turtle Munch
-
-HTML/JavaScript game staring a very hungry sea turtle and some craaaazy strawberry bros.
+Turtle Munch: A basic JavaScript game staring a very hungry sea turtle and some craaaazy strawberry bros.
