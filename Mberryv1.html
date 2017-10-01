@@ -15,11 +15,13 @@ canvas {
 var myBerries = [];
 var myBackground;
 var myScore;
+var mySound;
 
 function startGame() {
     myTurtle = new component(70, 30, "img/turtle.png", 100, 130, "image");
     myBackground = new component(656, 270, "img/sea.jpg", 0, 0, "background");
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    mySound = new sound("nom.wav");
     myGameArea.start();
 }
 
@@ -110,6 +112,7 @@ function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myBerries.length; i += 1) {
         if (myTurtle.crashWith(myBerries[i])) {
+            mySound.play();
             myGameArea.stop();
             return;
         }
@@ -132,10 +135,30 @@ function updateGameArea() {
         myBerries[i].newPos();
         myBerries[i].update();
     }
+   
+    if (myGameArea.key == 37) {myTurtle.speedX = -1; }
+    if (myGameArea.key == 39) {myTurtle.speedX = 1; }
+    if (myGameArea.key == 38) {myTurtle.speedY = -1; }
+    if (myGameArea.key == 40) {myTurtle.speedY = 1; }
     myTurtle.newPos();
     myTurtle.update();
     myScore.text = "SCORE: " + myGameArea.frameNo;
     myScore.update();
+}
+
+function sound(src) { 
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }
 }
 
 function everyinterval(n){
@@ -145,22 +168,9 @@ function everyinterval(n){
     return false;
 }
 
-function move(dir){
-    if (dir == "up") {myTurtle.speedY = -1; }
-    if (dir == "down") {myTurtle.speedY = 1; }
-    if (dir == "left") {myTurtle.speedX = -1; }
-    if (dir == "right") {myTurtle.speedX = 1; }
-}
 
 
 </script>
-
-<div style="text-align:center;width:480px;">
-  <button onmousedown="move('up')" onmouseup="clearmove()" ontouchstart="move('up')">UP</button><br><br>
-  <button onmousedown="move('left')" onmouseup="clearmove()" ontouchstart="move('left')">LEFT</button>
-  <button onmousedown="move('right')" onmouseup="clearmove()" ontouchstart="move('right')">RIGHT</button><br><br>
-  <button onmousedown="move('down')" onmouseup="clearmove()" ontouchstart="move('down')">DOWN</button>
-</div>
 
 </body>
 </html>
