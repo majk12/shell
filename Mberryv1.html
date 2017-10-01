@@ -19,9 +19,15 @@ var mySound;
 var score = 0;
 
 function startGame() {
+<<<<<<< HEAD
     myTurtle = new component(70, 30, "img/turtle.png", 100, 130, "image", true);
     myBackground = new component(656, 270, "img/sea.jpg", 0, 0, "background", false);
     myScore = new component("30px", "Consolas", "black", 280, 40, "text", false);
+=======
+    myTurtle = new component(70, 30, "img/turtle.png", 100, 130, "image");
+    myBackground = new component(window.innerWidth, window.innerHeight, "img/sea.jpg", 0, 0, "background");
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+>>>>>>> ae1a4f759183046974549deea830b84d98276a2a
     mySound = new sound("nom.wav");
     myGameArea.start();
 }
@@ -29,8 +35,8 @@ function startGame() {
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
+        this.canvas.width = window.innerWidth /2;
+        this.canvas.height = window.innerHeight/2;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
