@@ -126,8 +126,8 @@ function updateGameArea() {
         myBerries[i].update();
     }
    
-    if (myGameArea.key == 37) {myTurtle.speedX = -1; }
-    if (myGameArea.key == 39) {myTurtle.speedX = 1; }
+    if (myGameArea.key == 37) {myTurtle.image.src = "img/turtleL.png"; myTurtle.speedX = -1; }
+    if (myGameArea.key == 39) {myTurtle.image.src = "img/turtle.png"; myTurtle.speedX = 1; }
     if (myGameArea.key == 38) {myTurtle.speedY = -1; }
     if (myGameArea.key == 40) {myTurtle.speedY = 1; }
     
